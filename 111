@@ -1,0 +1,36 @@
+from pywinauto import Application
+from pywinauto.controls.win32_controls import ComboBox, Button
+
+# Создание приложения
+app = Application().start("notepad.exe")
+
+# Получение списка окон
+windows = app.windows()
+
+# Создание списка имен окон
+window_names = [window.window_text() for window in windows]
+
+# Создание окна
+window = app.window(title="Название")
+
+# Получение выпадающих списков
+window_dropdowns = window.children(title="Открывающийся список")
+
+# Получение кнопки
+window_button = window.Button()
+
+# Вывод списка имен окон
+print("Список открытых окон:")
+for name in window_names:
+    print(name)
+
+# Выбор окна
+window_index = int(input("Введите номер окна: "))
+window = windows[window_index]
+
+# Выбор элементов выпадающих списков
+window_dropdowns[0].select("Блокнот_1")
+window_dropdowns[1].select("А")
+
+# Нажатие кнопки
+window_button.click()
